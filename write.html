@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Write — Folium</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#FAF6EF">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="css/style.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="editor-topbar">
+  <a href="index.html" class="btn btn--ghost">Cancel</a>
+  <div style="display:flex; gap:10px; align-items:center;">
+    <span id="saveStatus" style="font-size:13px; color:var(--ink-faint);"></span>
+    <button class="btn btn--outline" id="draftBtn">Save draft</button>
+    <button class="btn btn--primary" id="publishBtn">Publish</button>
+  </div>
+</div>
+
+<div class="editor-shell">
+  <label class="editor-cover" id="coverPicker">
+    <span id="coverPlaceholder">+ Add a cover image (optional)</span>
+    <img id="coverPreview" class="hidden" alt="Cover preview">
+    <input type="file" id="coverInput" accept="image/*" class="hidden">
+  </label>
+
+  <textarea id="titleInput" class="editor-title" placeholder="Your story's title" rows="1"></textarea>
+  <p class="editor-tagline">Tell your story. Long-form or short — write it the way it needs to be told.</p>
+
+  <div class="field" style="margin-bottom:28px;">
+    <label>Tags</label>
+    <div class="tag-input" id="tagInputWrap">
+      <input type="text" id="tagInput" placeholder="Add a tag and press Enter">
+    </div>
+  </div>
+
+  <div id="editorBody"></div>
+</div>
+
+<div class="modal-overlay" id="publishModal">
+  <div class="modal">
+    <h3>Ready to publish?</h3>
+    <p>Your story will be visible to everyone on Folium and shared with your followers.</p>
+    <div class="modal-actions">
+      <button class="btn btn--ghost" id="cancelPublish">Not yet</button>
+      <button class="btn btn--primary" id="confirmPublish">Publish now</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-storage-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/utils.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+<script src="js/editor.js"></script>
+</body>
+</html>

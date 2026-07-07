@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title id="pageTitle">Folium</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#FAF6EF">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead__inner">
+    <a href="index.html" class="brand">Foli<em>um</em></a>
+    <div style="flex:1;"></div>
+    <div class="masthead__actions">
+      <a href="write.html" class="btn btn--ghost">Write</a>
+      <a href="#" id="profileLink"><span id="navAvatar"></span></a>
+    </div>
+  </div>
+</header>
+
+<div class="post-shell">
+  <div id="postContent"><div class="spinner"></div></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-storage-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/post.js"></script>
+</body>
+</html>

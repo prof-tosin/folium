@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Folium — Sign in</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#FAF6EF">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="brand">Foli<em>um</em></div>
+    <p class="auth-sub" id="authSub">A quiet place to publish your writing.</p>
+
+    <!-- LOGIN FORM -->
+    <form id="loginForm">
+      <div class="field">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" required autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" required autocomplete="current-password">
+        <div class="field-error hidden" id="loginError"></div>
+      </div>
+      <button type="submit" class="btn btn--primary btn--block" id="loginBtn">Sign in</button>
+    </form>
+
+    <!-- REGISTER FORM -->
+    <form id="registerForm" class="hidden">
+      <div class="field">
+        <label for="regName">Full name</label>
+        <input type="text" id="regName" required autocomplete="name" placeholder="Oluwatosin Odejinmi">
+      </div>
+      <div class="field">
+        <label for="regUsername">Username</label>
+        <input type="text" id="regUsername" required pattern="[a-zA-Z0-9_]{3,20}" placeholder="e.g. kaiwrites">
+        <div class="field-error hidden" id="usernameError"></div>
+      </div>
+      <div class="field">
+        <label for="regEmail">Email</label>
+        <input type="email" id="regEmail" required autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="regPassword">Password</label>
+        <input type="password" id="regPassword" required minlength="6" autocomplete="new-password">
+      </div>
+      <div class="field">
+        <label for="regBio">Short bio <span style="color:var(--ink-faint); font-weight:400;">(optional)</span></label>
+        <textarea id="regBio" rows="2" placeholder="Tell readers what you write about"></textarea>
+      </div>
+      <div class="field-error hidden" id="registerError"></div>
+      <button type="submit" class="btn btn--primary btn--block" id="registerBtn">Create account</button>
+    </form>
+
+    <p class="auth-switch">
+      <span id="toRegisterWrap">New to Folium? <a href="#" id="toRegister">Create an account</a></span>
+      <span id="toLoginWrap" class="hidden">Already have an account? <a href="#" id="toLogin">Sign in</a></span>
+    </p>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-storage-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>
