@@ -4,12 +4,12 @@
 // Firebase Console → Project settings → General → "Your apps" → SDK setup
 // ============================================================================
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDwDFgsb8TTkWo2WmZkDML-Xfx9wFGYUxY",
+  authDomain: "folium-c4b2c.firebaseapp.com",
+  projectId: "folium-c4b2c",
+  storageBucket: "folium-c4b2c.firebasestorage.app",
+  messagingSenderId: "280634061425",
+  appId: "1:280634061425:web:e6af123c05dfa9a7eda1d0"
 };
 
 firebase.initializeApp(firebaseConfig);
