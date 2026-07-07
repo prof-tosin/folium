@@ -19,7 +19,7 @@ folium/
 ├─ firestore.rules     Firestore security rules
 ├─ storage.rules        Storage security rules (cover images)
 ├─ firestore.indexes.json
-├─ firebase.json        Hosting + deploy config
+├─ firebase.json        (optional — only needed if you ever use the Firebase CLI instead)
 ├─ css/style.css
 ├─ js/ (firebase-config.js, utils.js, auth.js, app.js, editor.js, post.js, profile.js, explore.js)
 └─ icons/ (192, 512, maskable, apple-touch)
@@ -59,39 +59,77 @@ const firebaseConfig = {
 };
 ```
 
-## Step 3 — Deploy security rules and indexes
+## Step 3 — Deploy security rules and indexes (no CLI needed — Console only)
 
-You need the Firebase CLI once, then it's a two-line deploy from now on.
+Everything here is pasted into the Firebase Console in your browser. No
+terminal required.
 
-```bash
-npm install -g firebase-tools
-firebase login
-cd folium
-firebase use --add        # pick your project, give it an alias like "default"
-firebase deploy --only firestore:rules,firestore:indexes,storage
-```
+1. **Firestore rules** — Console → **Build → Firestore Database → Rules**
+   tab → delete what's there → paste the entire contents of `firestore.rules`
+   → **Publish**.
+2. **Storage rules** — Console → **Build → Storage → Rules** tab → same
+   thing: paste `storage.rules` → **Publish**.
+3. **Indexes** — you don't need to create these upfront. Just use the app
+   once it's live: the first time a feed query needs a composite index that
+   doesn't exist yet, Firestore throws an error in the browser console
+   (press F12 → Console tab) that includes a direct link like
+   `https://console.firebase.google.com/.../create_composite_index?...`.
+   Click it → it opens the Console with every field pre-filled → click
+   **Create**. It takes a couple of minutes to build. Do this once per query
+   the first time you hit each tab (Following feed, Trending, a tag page,
+   etc.) — after that it's instant for everyone.
 
-This pushes `firestore.rules`, `firestore.indexes.json`, and `storage.rules`
-— without these, reads/writes will fail with "permission denied," and some
-feed queries won't run until their composite index finishes building
-(Firebase Console → Firestore → Indexes will show progress).
+## Step 4 — Get the code into GitHub (no `git push` from a PC)
 
-## Step 4 — Deploy the site (Firebase Hosting)
+Since you're pasting straight into GitHub's web interface rather than pushing
+from a local machine, here's the browser-only way to do it:
 
-```bash
-firebase init hosting     # if not already initialized — point "public" to "."
-firebase deploy --only hosting
-```
+1. On github.com, click **New repository** → name it (e.g. `folium`) →
+   **Create repository**.
+2. On the repo's main page, click **Add file → Upload files**.
+3. Unzip `folium.zip` on your device first, then drag the **contents** of the
+   folder (not the zip itself) into the upload box — `index.html`, `css/`,
+   `js/`, `icons/`, all of it at once. Modern browsers preserve the folder
+   structure when you drag a whole folder in. If your browser only accepts
+   individual files (common on mobile), you'll need to create the subfolders
+   manually — see the fallback below.
+4. Scroll down, add a commit message like "Initial upload", click
+   **Commit changes**.
 
-You'll get a live URL like `https://your-project.web.app`. Every later change
-is just `firebase deploy --only hosting` again.
+**Fallback if drag-and-drop of folders doesn't work on your device:** use
+**Add file → Create new file** instead of Upload. In the file name box, type
+the full path including folders — e.g. typing `css/style.css` as the
+filename automatically creates the `css` folder and puts the file inside it.
+Paste the file's content in the editor below, commit. Repeat for each file
+(`index.html`, `auth.html`, `write.html`, `post.html`, `profile.html`,
+`explore.html`, `manifest.json`, `sw.js`, everything in `css/`, `js/`, and
+`icons/`). It's more clicks but works entirely from a phone browser too.
 
-**Alternative hosts** (also fully static, no server needed): Vercel, Netlify,
-or GitHub Pages — same as your other projects. Just make sure whichever host
-you pick serves `sw.js` from the site root, or the PWA install prompt won't
-qualify.
+## Step 5 — Turn the repo into a live site (GitHub Pages)
 
-## Step 5 — Make it installable (PWA)
+1. In your repo, go to **Settings → Pages**.
+2. Under **Build and deployment → Source**, choose **Deploy from a branch**.
+3. Branch: **main**, folder: **/ (root)** → **Save**.
+4. Wait a minute, then refresh — GitHub shows the live URL at the top:
+   `https://your-username.github.io/folium/`.
+
+That's your whole hosting step — no CLI, no build, just static files GitHub
+now serves directly. Any time you edit a file again through GitHub's web
+editor and commit, the live site updates automatically within a minute or two.
+
+**Note on the URL shape:** GitHub Pages serves a repo at a *subpath*
+(`/folium/`), not your domain's root. The code here already uses relative
+paths everywhere (`./sw.js`, `./index.html`, etc. in the manifest and service
+worker) specifically so it works correctly at that subpath — you don't need
+to change anything. If you later point a custom domain at it (like your
+`futaoc.name.ng` setup), that also works unchanged.
+
+**Alternative hosts** (also fully static, drag-and-drop friendly, no CLI):
+Netlify and Vercel both let you drag a folder straight into their web
+dashboard to deploy — worth knowing if you ever want an alternative to
+GitHub Pages.
+
+## Step 6 — Make it installable (PWA)
 
 This is already wired up:
 - `manifest.json` — app name, icons, theme colors, standalone display mode
@@ -112,7 +150,7 @@ banner — that's an Apple platform limitation, not a bug in the app. Tell
 users: open the site in Safari → tap **Share** → **Add to Home Screen**. It
 still launches full-screen with your icon, exactly like a native app.
 
-## Step 6 — Test it end to end
+## Step 7 — Test it end to end
 
 1. Open the deployed URL → **Create an account** (auth.html) — fill name,
    username, email, password.
@@ -122,7 +160,7 @@ still launches full-screen with your icon, exactly like a native app.
    share sheet on mobile, clipboard copy on desktop).
 4. Visit another account's profile → **Follow** → check it shows up in your
    **Following** feed.
-5. On your phone, confirm the **Install** flow from Step 5.
+5. On your phone, confirm the **Install** flow from Step 6.
 
 ---
 
