@@ -103,7 +103,9 @@ function currentUserDoc(uid) {
 function registerServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').catch(err => console.warn('SW registration failed', err));
+      // Relative path so this works whether the site lives at a domain root
+      // (e.g. futaoc.name.ng) or a GitHub Pages project path (e.g. username.github.io/folium/)
+      navigator.serviceWorker.register('./sw.js').catch(err => console.warn('SW registration failed', err));
     });
   }
 }
