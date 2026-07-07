@@ -4,12 +4,14 @@
 // (they have their own offline handling via Firestore persistence).
 // ============================================================================
 const CACHE_NAME = 'folium-shell-v1';
+// Relative to this file's own location, so it works whether Folium is hosted
+// at a domain root or a GitHub Pages project subpath (username.github.io/repo/)
 const APP_SHELL = [
-  '/', '/index.html', '/auth.html', '/write.html', '/post.html', '/profile.html', '/explore.html',
-  '/css/style.css',
-  '/js/utils.js', '/js/firebase-config.js', '/js/app.js', '/js/auth.js', '/js/editor.js', '/js/post.js', '/js/profile.js', '/js/explore.js',
-  '/manifest.json',
-  '/icons/icon-192.png', '/icons/icon-512.png'
+  './index.html', './auth.html', './write.html', './post.html', './profile.html', './explore.html',
+  './css/style.css',
+  './js/utils.js', './js/firebase-config.js', './js/app.js', './js/auth.js', './js/editor.js', './js/post.js', './js/profile.js', './js/explore.js',
+  './manifest.json',
+  './icons/icon-192.png', './icons/icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
